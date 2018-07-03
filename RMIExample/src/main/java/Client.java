@@ -10,8 +10,15 @@ public class Client {
     private static Registry registry;
 
     public static void main(String[] args) throws RemoteException, NotBoundException {
-        registry = LocateRegistry.getRegistry(HOST, PORT);
-        WeatherService service = (WeatherService) registry.lookup(WeatherService.class.getSimpleName());
+        WeatherService service = null;
+        try {
+            registry = LocateRegistry.getRegistry(HOST, PORT);
+            service = (WeatherService) registry.lookup(WeatherService.class.getSimpleName());
+        } catch (RemoteException e) {
+            e.printStackTrace();
+        } catch (NotBoundException e) {
+            e.printStackTrace();
+        }
 
         Date today = new Date();
         WeatherData weatherCHICAGO = service.getWeatherData(today, Constants.LOCATION_CHIKAGO);
