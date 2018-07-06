@@ -12,6 +12,7 @@
         <module>RMIExample</module>
         <module>Reflection</module>
         <module>Logging</module>
+        <module>Serblets</module>
     </modules>
 
 
